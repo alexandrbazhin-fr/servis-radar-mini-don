@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сервис-радар мини-отеля · Мини-ДОН</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F5B57'/%3E%3Cpath d='M9 25V15a7 7 0 0 1 14 0v10' fill='none' stroke='%23F6F1E8' stroke-width='2.4'/%3E%3Ccircle cx='16' cy='17' r='2.4' fill='%23D9A55A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..700&family=Cormorant+Garamond:wght@600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" aria-label="Навигация">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40" fill="none" aria-label="Сервис-радар" role="img">
+        <path d="M10 33V18a10 10 0 0 1 20 0v15" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M15.5 21a4.5 4.5 0 0 1 9 0" stroke="var(--brass)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M12.8 21a7.2 7.2 0 0 1 14.4 0" stroke="var(--brass)" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>
+        <circle cx="20" cy="23" r="2.2" fill="var(--brass)"/>
+        <path d="M6 33h28" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="brand-name">Сервис-радар</div>
+        <div class="brand-sub">мини-отеля</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="nav-item" data-tab="events"><span class="ico" data-ico="calendar"></span><span>События</span><span class="badge" id="b-events"></span></button>
+      <button class="nav-item" data-tab="rates"><span class="ico" data-ico="tag"></span><span>Конкуренты</span><span class="badge" id="b-rates"></span></button>
+      <button class="nav-item" data-tab="food"><span class="ico" data-ico="food"></span><span>Общепит</span><span class="badge" id="b-food"></span></button>
+      <button class="nav-item" data-tab="reviews"><span class="ico" data-ico="chat"></span><span>Отзывы</span><span class="badge" id="b-reviews"></span></button>
+      <button class="nav-item" data-tab="metrics"><span class="ico" data-ico="chart"></span><span>Метрики</span></button>
+      <button class="nav-item" data-tab="summary"><span class="ico" data-ico="doc"></span><span>Сводка</span></button>
+    </nav>
+    <div class="side-foot">
+      <div class="hotel-card">
+        <div class="hotel-name" id="hotelName">«Мини-ДОН»</div>
+        <div class="muted small" id="hotelMeta">Ростов-на-Дону · 30 номеров</div>
+        <div class="src-status" id="srcStatus"><span class="dot"></span><span>Загрузка…</span></div>
+        <div class="src-actions">
+          <a class="btn sm" id="sheetLink" target="_blank" rel="noopener">Таблица</a>
+          <button class="btn sm" id="syncBtn">Обновить</button>
+        </div>
+      </div>
+      <button class="btn ghost theme-btn" id="themeBtn" aria-label="Сменить тему"><span class="ico" data-ico="moon"></span><span id="themeLbl">Тёмная тема</span></button>
+    </div>
+  </aside>
+
+  <div class="main-col">
+    <header class="topbar">
+      <div class="title-wrap">
+        <h1 id="pageTitle">События</h1>
+        <p class="muted small" id="pageSub"></p>
+      </div>
+      <div class="top-actions">
+        <span class="updated muted small" id="updated"></span>
+        <button class="btn" id="exportTabBtn"><span class="ico" data-ico="download"></span><span>Экспорт CSV</span></button>
+        <button class="btn primary" id="toSummaryBtn"><span class="ico" data-ico="doc"></span><span>Сводка</span></button>
+      </div>
+    </header>
+    <main class="main" id="main">
+      <section class="tab" id="tab-events" hidden></section>
+      <section class="tab" id="tab-rates" hidden></section>
+      <section class="tab" id="tab-food" hidden></section>
+      <section class="tab" id="tab-reviews" hidden></section>
+      <section class="tab" id="tab-metrics" hidden></section>
+      <section class="tab" id="tab-summary" hidden></section>
+    </main>
+  </div>
+</div>
+
+<div class="modal-back" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><h2 id="modalTitle"></h2><button class="icon-btn" id="modalClose" aria-label="Закрыть"><span class="ico" data-ico="x"></span></button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="sheet-data.js"></script>
+<script src="sheets.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
